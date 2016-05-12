@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas, svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #chart {
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+<div id="chart">
+    <canvas id="canvas1" width="600" height="600"></canvas>
+    <svg width="600" height="600"></svg>
+</div>
+</body>
+<script src="Canvas-Parser.js"></script>
+<script src="d3.js"></script>
+<script>
+    //    var x = 5, y = 5, x1= 5,y1=30;
+    //    console.log(Math.ceil(d3.scale.linear().domain([5,140]).range([35,565])(13)));
+    //    console.log(Math.ceil(d3.scale.linear().domain([5,140]).range([565,35])(13)));
+    //
+    //    var canvas = document.getElementById("canvas1");
+    //    var context = canvas.getContext("2d");
+    //    var Line = new Line();
+    //    var Point = new Point();
+    //    var Picture = new Picture();
+    //    var Axes = new Axes();
+    //    Line.draw(10,20,40,50,"Blue",2);
+    //    Line.draw(40,50,100,90,"Red",2);
+    //
+
+
+    //    Picture.draw([
+    //        {
+    //            "x" : 100,
+    //            "y" : 100,
+    //            "src" : "lemontuaregd4jt7.jpg"
+    //        },
+    //        {
+    //            "x" : 40,
+    //            "y" : 20,
+    //            "src" : "lemontuaregd4jt7.jpg"
+    //        }
+    //    ]);
+
+
+    //    Axes.draw([
+    //        {type : "x" , orientation: "bottom", values : [27,54,81,108,135,27,54,81,108,135,108,135,27,54,81,108,135,27,54] , min: 5, max: 140, margin: 35, height: 600, width: 600, grid: true},
+    //        {type : "y" , orientation: "left", values : [27,54,81,108,135,27,54,81,108,135,108,135,27,54,81,108,135,27,54] , min: 5, max: 140, margin: 35, height: 600, width: 600, grid: true}
+    //    ]);
+    //
+    //    Line.draw([
+    //        {
+    //            "startX" : 10,
+    //            "startY" : 90,
+    //            "endX" : 40,
+    //            "endY" : 50,
+    //            "color" : "Blue",
+    //            "width" : 6
+    //        },{
+    //            "startX" : 40,
+    //            "startY" : 200,
+    //            "endX" : 100,
+    //            "endY" : 90,
+    //            "color" : "Red",
+    //            "width" : 60
+    //        }
+    //    ]);
+    //
+    //
+    //    Point.draw([
+    //        {
+    //            "x" : 35,
+    //            "y" : 565,
+    //            "radius" : 4,
+    //            "startAngle" : 0,
+    //            "endAngle" : 360,
+    //            "anticlockwise" : false,
+    //            "color" : "Black",
+    //            "width" : 2,
+    //            "fillColor" : "gray"
+    //        },{
+    //            "x" : 67,
+    //            "y" : 534,
+    //            "radius" : 4,
+    //            "startAngle" : 0,
+    //            "endAngle" : 360,
+    //            "anticlockwise" : false,
+    //            "color" : "Black",
+    //            "width" : 2,
+    //            "fillColor" : "gray"
+    //        }
+    //    ]);
+    var obj = {
+        "id": "canvas1",
+        "Background": "rgba(170, 170, 170, 0.5)",
+        "Axes": [
+            {
+                "type": "x",
+                "orientation": "bottom",
+                "values": [27, 54, 81, 108, 135, 27, 54, 81, 108, 135, 108, 135, 27, 54, 81, 108, 135, 27, 54],
+                "min": 5,
+                "max": 140,
+                "margin": 35,
+                "height": 600,
+                "width": 600,
+                "grid": true
+            }
+            ,
+            {
+                "type": "y",
+                "orientation": "left",
+                "values": [27, 54, 81, 108, 135, 27, 54, 81, 108, 135, 108, 135, 27, 54, 81, 108, 135, 27, 54],
+                "min": 5,
+                "max": 140,
+                "margin": 35,
+                "height": 600,
+                "width": 600,
+                "grid": true
+            }
+        ],
+        "Point": [
+            {
+                "x": 35,
+                "y": 565,
+                "radius": 5,
+                "startAngle": 0,
+                "endAngle": 360,
+                "anticlockwise": false,
+                "color": "Black",
+                "linewidth": 2,
+                "fillColor": "gray"
+            }],
+        "Diamond": [{
+            "x": 67,
+            "y": 534,
+            "color": "Blue",
+        }
+        ],
+        "Picture": [{
+            "x": 100,
+            "y": 100,
+            "src": "SteveJobs-20.png"
+        }],
+        "Line": [
+            {
+                "startX": 10,
+                "startY": 90,
+                "endX": 40,
+                "endY": 50,
+                "color": "Blue",
+                "width": 6
+            }, {
+                "startX": 40,
+                "startY": 200,
+                "endX": 100,
+                "endY": 90,
+                "color": "Red",
+                "width": 60
+            }
+        ],
+        "Area": [{
+            "points": [[150, 200], [400, 150], [500, 100]],
+            "color": "black",
+            "fillColor": "rgba(200, 170, 170, 0.8)",
+            "margin": 35,
+            "height": 600,
+            "width": 600
+
+        },{
+            "points": [[250, 200], [300, 150], [450, 100]],
+            "color": "black",
+            "fillColor": "rgba(120, 170, 170,1)",
+            "margin": 35,
+            "height": 600,
+            "width": 600
+
+        }],
+        "Tooltip": true
+    };
+    Canvas_Parse(obj);
+
+
+</script>
+</html>
