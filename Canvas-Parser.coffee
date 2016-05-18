@@ -14,15 +14,15 @@ Line::draw = (obj)->
     else
       i.width
 
-    context.beginPath()
-    context.moveTo(i.startX, i.startY)
-    context.lineTo(i.endX, i.endY)
-    context.strokeStyle = color
-    context.lineWidth = width
-    context.stroke()
-    context.closePath()
-    context.strokeStyle = "#000000"
-    context.lineWidth = 1
+    lib.context.beginPath()
+    lib.context.moveTo(i.startX, i.startY)
+    lib.context.lineTo(i.endX, i.endY)
+    lib.context.strokeStyle = color
+    lib.context.lineWidth = width
+    lib.context.stroke()
+    lib.context.closePath()
+    lib.context.strokeStyle = "#000000"
+    lib.context.lineWidth = 1
 
 
 
@@ -46,20 +46,20 @@ Area::draw = (obj)->
     else
       i.fillColor
 
-    context.beginPath()
-    context.lineCap = "round"
-    context.moveTo(i.points[0][0], i.height-i.margin)
+    lib.context.beginPath()
+    lib.context.lineCap = "round"
+    lib.context.moveTo(i.points[0][0], i.height-i.margin)
     for k in i.points
-      context.lineTo(k[0],k[1])
-    context.lineTo(i.points[i.points.length-1][0],i.height-i.margin)
-    context.fillStyle = fillColor
-    context.fill()
-    context.strokeStyle = color
-    context.stroke()
-    context.closePath()
-    context.strokeStyle = "#000000"
-    context.lineWidth = 1
-    context.fillStyle = "#000000"
+      lib.context.lineTo(k[0],k[1])
+    lib.context.lineTo(i.points[i.points.length-1][0],i.height-i.margin)
+    lib.context.fillStyle = fillColor
+    lib.context.fill()
+    lib.context.strokeStyle = color
+    lib.context.stroke()
+    lib.context.closePath()
+    lib.context.strokeStyle = "#000000"
+    lib.context.lineWidth = 1
+    lib.context.fillStyle = "#000000"
 
 
       
@@ -71,10 +71,10 @@ class Background extends Canvas_Geometry
 Background::draw = (value)->
   url = "http"
   if value.indexOf(url) > -1
-    canvas.style.backgroundImage = 'url('+value+')'
-    canvas.style.backgroundSize = '100% 100%'
+    lib.canvas.style.backgroundImage = 'url('+value+')'
+    lib.canvas.style.backgroundSize = '100% 100%'
   else
-    canvas.style.backgroundColor = value
+    lib.canvas.style.backgroundColor = value
 
 
 
@@ -90,20 +90,20 @@ Diamond::draw = (obj)->
 
     cursorx = 4
     cursory = 4
-    context.beginPath()
-    context.moveTo(i.x, i.y-cursory)
-    context.lineTo(i.x+cursorx, i.y)
-    context.lineTo(i.x, i.y+cursory)
-    context.lineTo(i.x - cursorx, i.y)
-    context.lineTo(i.x, i.y-cursory)
-    context.fillStyle = color
-    context.fill()
-    context.strokeStyle = color
-    context.stroke()
-    context.closePath()
-    context.strokeStyle = "#000000"
-    context.lineWidth = 1
-    context.fillStyle = "#000000"
+    lib.context.beginPath()
+    lib.context.moveTo(i.x, i.y-cursory)
+    lib.context.lineTo(i.x+cursorx, i.y)
+    lib.context.lineTo(i.x, i.y+cursory)
+    lib.context.lineTo(i.x - cursorx, i.y)
+    lib.context.lineTo(i.x, i.y-cursory)
+    lib.context.fillStyle = color
+    lib.context.fill()
+    lib.context.strokeStyle = color
+    lib.context.stroke()
+    lib.context.closePath()
+    lib.context.strokeStyle = "#000000"
+    lib.context.lineWidth = 1
+    lib.context.fillStyle = "#000000"
 
 
 class Point extends Canvas_Geometry
@@ -140,16 +140,16 @@ Point::draw = (obj) ->
     else
       i.endAngle
 
-    context.beginPath()
-    context.arc(i.x, i.y, radius, (Math.PI / 180) * startAngle, (Math.PI / 180) * endAngle, anticlockwise)
-    context.fillStyle = fillColor
-    context.fill()
-    context.lineWidth = linewidth
-    context.strokeStyle = color
-    context.stroke()
-    context.strokeStyle = "#000000"
-    context.lineWidth = 1
-    context.fillStyle = "#000000"
+    lib.context.beginPath()
+    lib.context.arc(i.x, i.y, radius, (Math.PI / 180) * startAngle, (Math.PI / 180) * endAngle, anticlockwise)
+    lib.context.fillStyle = fillColor
+    lib.context.fill()
+    lib.context.lineWidth = linewidth
+    lib.context.strokeStyle = color
+    lib.context.stroke()
+    lib.context.strokeStyle = "#000000"
+    lib.context.lineWidth = 1
+    lib.context.fillStyle = "#000000"
 
 
 class Picture extends Canvas_Geometry
@@ -165,10 +165,10 @@ Picture::Process = (obj) ->
   image.onload = ()->
     imageWidth = image.width
     imageHeight = image.height
-    context.save()
-    context.translate(obj.x - (imageHeight/2), obj.y - (imageWidth/2))
-    context.drawImage(image, 0, 0)
-    context.restore()
+    lib.context.save()
+    lib.context.translate(obj.x - (imageHeight/2), obj.y - (imageWidth/2))
+    lib.context.drawImage(image, 0, 0)
+    lib.context.restore()
 
 
 class Text extends Canvas_Geometry
@@ -176,8 +176,8 @@ class Text extends Canvas_Geometry
 
 Text::draw = (obj)->
   for i in obj
-    context.font = "15px Arial";
-    context.fillText(i.text, i.x, i.y)
+    lib.context.font = "15px Arial";
+    lib.context.fillText(i.text, i.x, i.y)
 
 
 
@@ -200,80 +200,80 @@ Axes::draw = (obj) ->
       else
         i.orientation
 
-    context.beginPath()
+    lib.context.beginPath()
 
     if i.type == "x"
-      context.strokeStyle = "#000000"
+      lib.context.strokeStyle = "#000000"
       if i.orientation == "top"
-        context.moveTo(i.margin, i.margin)
-        context.lineTo(i.width - i.margin, i.margin)
+        lib.context.moveTo(i.margin, i.margin)
+        lib.context.lineTo(i.width - i.margin, i.margin)
       else
-        context.moveTo(i.margin, i.height - i.margin)
-        context.lineTo(i.width - i.margin, i.height - i.margin)
+        lib.context.moveTo(i.margin, i.height - i.margin)
+        lib.context.lineTo(i.width - i.margin, i.height - i.margin)
 
-      context.stroke()
-      context.strokeStyle = "rgba(128, 128, 255, 0.5)"
+      lib.context.stroke()
+      lib.context.strokeStyle = "rgba(128, 128, 255, 0.5)"
 #      j = 0
 #      while j <= i.values.length
 #        currentY = i.margin + j / i.values.length * (i.height - (2 * i.margin))
 #        if i.grid == true
-#          context.moveTo i.width - i.margin, currentY
-#          context.lineTo i.margin, currentY
-#        context.fillText(Math.ceil(i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)), 10, currentY + 4);
+#          lib.context.moveTo i.width - i.margin, currentY
+#          lib.context.lineTo i.margin, currentY
+#        lib.context.fillText(Math.ceil(i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)), 10, currentY + 4);
 #        j++
       j = 0
       while j <= i.values.length
         currentX = i.margin + j / i.values.length * (i.width - (2 * i.margin))
         if i.grid == true
-          context.moveTo currentX, i.margin
-          context.lineTo currentX, (i.height - i.margin)
+          lib.context.moveTo currentX, i.margin
+          lib.context.lineTo currentX, (i.height - i.margin)
         if i.orientation == "top"
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * (j)).toFixed(2), currentX - 3,
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * (j)).toFixed(2), currentX - 3,
              i.margin / 2)
         else
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * (j)).toFixed(2), currentX - 3,
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * (j)).toFixed(2), currentX - 3,
             (i.height - i.margin) + i.margin / 2)
 
         j++
 
-      context.stroke()
-      context.strokeStyle = "#000000"
+      lib.context.stroke()
+      lib.context.strokeStyle = "#000000"
     if i.type == "y"
 
       if i.orientation == "right"
-        context.moveTo(i.width - i.margin, i.margin)
-        context.lineTo(i.width - i.margin, i.height - i.margin)
+        lib.context.moveTo(i.width - i.margin, i.margin)
+        lib.context.lineTo(i.width - i.margin, i.height - i.margin)
       else
-        context.moveTo(i.margin, i.margin)
-        context.lineTo(i.margin, i.height - i.margin)
+        lib.context.moveTo(i.margin, i.margin)
+        lib.context.lineTo(i.margin, i.height - i.margin)
 
-      context.stroke()
-      context.strokeStyle = "rgba(128, 128, 255, 0.5)"
+      lib.context.stroke()
+      lib.context.strokeStyle = "rgba(128, 128, 255, 0.5)"
 #      j = 0
 #      while j <= i.values.length
 #        currentX = i.margin + j / i.values.length * (i.width - (2 * i.margin))
 #        if i.grid == true
-#          context.moveTo currentX, i.margin
-#          context.lineTo currentX, (i.height - i.margin)
-#        context.fillText(Math.ceil(i.min + ((i.max - i.min) / i.values.length) * (j)), currentX - 3,
+#          lib.context.moveTo currentX, i.margin
+#          lib.context.lineTo currentX, (i.height - i.margin)
+#        lib.context.fillText(Math.ceil(i.min + ((i.max - i.min) / i.values.length) * (j)), currentX - 3,
 #          (i.height - i.margin) + i.margin / 2)
 #        j++
       j = 0
       while j <= i.values.length
         currentY = i.margin + j / i.values.length * (i.height - (2 * i.margin))
         if i.grid == true
-          context.moveTo i.width - i.margin, currentY
-          context.lineTo i.margin, currentY
+          lib.context.moveTo i.width - i.margin, currentY
+          lib.context.lineTo i.margin, currentY
         if i.orientation == "right"
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10  + i.width - i.margin , currentY + 4);
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10  + i.width - i.margin , currentY + 4);
         else
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10, currentY + 4);
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10, currentY + 4);
         j++
 
 
 
-      context.stroke()
-      context.strokeStyle = "#000000"
+      lib.context.stroke()
+      lib.context.strokeStyle = "#000000"
 
 
 
@@ -326,8 +326,8 @@ Tooltip::mouseout = () ->
 #  .duration(500)
 #  .style("opacity", 1e-6)
 
-Tooltip::getMousePos = (canvas,evt) ->
-#  rect = canvas.getBoundingClientRect()
+Tooltip::getMousePos = (canvas, evt) ->
+#  rect = lib.canvas.getBoundingClientRect()
 #  cords =
 #    x: evt.clientX - rect.left
 #    y: evt.clientY - rect.top
@@ -337,22 +337,22 @@ Tooltip::getMousePos = (canvas,evt) ->
 
 
 Canvas_Parse = (obj)->
-  window.canvas = document.getElementById(obj.id)
-  window.context = canvas.getContext("2d")
-  window.Line = new Line()
-  window.Point = new Point()
-  window.Picture = new Picture()
-  window.Axes = new Axes()
-  window.Diamond = new Diamond()
-  window.Background = new Background()
-  window.Tooltip = new Tooltip(obj)
-  window.Area = new Area()
-  window.Text = new Text()
+  lib.canvas = document.getElementById(obj.id)
+  lib.context = lib.canvas.getContext("2d")
+  lib.Line = new Line()
+  lib.Point = new Point()
+  lib.Picture = new Picture()
+  lib.Axes = new Axes()
+  lib.Diamond = new Diamond()
+  lib.Background = new Background()
+  lib.Tooltip = new Tooltip(obj)
+  lib.Area = new Area()
+  lib.Text = new Text()
   for key,value of obj
     if key == "id"
       continue
     else
-      window[key]["draw"](value)
+      lib[key]["draw"](value)
 
 
 

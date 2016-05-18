@@ -27,15 +27,15 @@ Line.prototype.draw = function(obj) {
     i = obj[l];
     color = i.color === null || i.color === void 0 ? "#FF0000" : i.color;
     width = i.width === null || i.width === void 0 ? 1 : i.width;
-    context.beginPath();
-    context.moveTo(i.startX, i.startY);
-    context.lineTo(i.endX, i.endY);
-    context.strokeStyle = color;
-    context.lineWidth = width;
-    context.stroke();
-    context.closePath();
-    context.strokeStyle = "#000000";
-    results.push(context.lineWidth = 1);
+    lib.context.beginPath();
+    lib.context.moveTo(i.startX, i.startY);
+    lib.context.lineTo(i.endX, i.endY);
+    lib.context.strokeStyle = color;
+    lib.context.lineWidth = width;
+    lib.context.stroke();
+    lib.context.closePath();
+    lib.context.strokeStyle = "#000000";
+    results.push(lib.context.lineWidth = 1);
   }
   return results;
 };
@@ -58,23 +58,23 @@ Area.prototype.draw = function(obj) {
     i = obj[l];
     color = i.color === null || i.color === void 0 ? "#FF0000" : i.color;
     fillColor = i.fillColor === null || i.fillColor === void 0 ? "#ffffff" : i.fillColor;
-    context.beginPath();
-    context.lineCap = "round";
-    context.moveTo(i.points[0][0], i.height - i.margin);
+    lib.context.beginPath();
+    lib.context.lineCap = "round";
+    lib.context.moveTo(i.points[0][0], i.height - i.margin);
     ref = i.points;
     for (m = 0, len1 = ref.length; m < len1; m++) {
       k = ref[m];
-      context.lineTo(k[0], k[1]);
+      lib.context.lineTo(k[0], k[1]);
     }
-    context.lineTo(i.points[i.points.length - 1][0], i.height - i.margin);
-    context.fillStyle = fillColor;
-    context.fill();
-    context.strokeStyle = color;
-    context.stroke();
-    context.closePath();
-    context.strokeStyle = "#000000";
-    context.lineWidth = 1;
-    results.push(context.fillStyle = "#000000");
+    lib.context.lineTo(i.points[i.points.length - 1][0], i.height - i.margin);
+    lib.context.fillStyle = fillColor;
+    lib.context.fill();
+    lib.context.strokeStyle = color;
+    lib.context.stroke();
+    lib.context.closePath();
+    lib.context.strokeStyle = "#000000";
+    lib.context.lineWidth = 1;
+    results.push(lib.context.fillStyle = "#000000");
   }
   return results;
 };
@@ -94,10 +94,10 @@ Background.prototype.draw = function(value) {
   var url;
   url = "http";
   if (value.indexOf(url) > -1) {
-    canvas.style.backgroundImage = 'url(' + value + ')';
-    return canvas.style.backgroundSize = '100% 100%';
+    lib.canvas.style.backgroundImage = 'url(' + value + ')';
+    return lib.canvas.style.backgroundSize = '100% 100%';
   } else {
-    return canvas.style.backgroundColor = value;
+    return lib.canvas.style.backgroundColor = value;
   }
 };
 
@@ -120,20 +120,20 @@ Diamond.prototype.draw = function(obj) {
     color = i.color === null || i.color === void 0 ? "#FF0000" : i.color;
     cursorx = 4;
     cursory = 4;
-    context.beginPath();
-    context.moveTo(i.x, i.y - cursory);
-    context.lineTo(i.x + cursorx, i.y);
-    context.lineTo(i.x, i.y + cursory);
-    context.lineTo(i.x - cursorx, i.y);
-    context.lineTo(i.x, i.y - cursory);
-    context.fillStyle = color;
-    context.fill();
-    context.strokeStyle = color;
-    context.stroke();
-    context.closePath();
-    context.strokeStyle = "#000000";
-    context.lineWidth = 1;
-    results.push(context.fillStyle = "#000000");
+    lib.context.beginPath();
+    lib.context.moveTo(i.x, i.y - cursory);
+    lib.context.lineTo(i.x + cursorx, i.y);
+    lib.context.lineTo(i.x, i.y + cursory);
+    lib.context.lineTo(i.x - cursorx, i.y);
+    lib.context.lineTo(i.x, i.y - cursory);
+    lib.context.fillStyle = color;
+    lib.context.fill();
+    lib.context.strokeStyle = color;
+    lib.context.stroke();
+    lib.context.closePath();
+    lib.context.strokeStyle = "#000000";
+    lib.context.lineWidth = 1;
+    results.push(lib.context.fillStyle = "#000000");
   }
   return results;
 };
@@ -161,16 +161,16 @@ Point.prototype.draw = function(obj) {
     anticlockwise = i.anticlockwise === null || i.anticlockwise === void 0 ? false : i.anticlockwise;
     startAngle = i.startAngle === null || i.startAngle === void 0 ? 0 : i.startAngle;
     endAngle = i.endAngle === null || i.endAngle === void 0 ? 360 : i.endAngle;
-    context.beginPath();
-    context.arc(i.x, i.y, radius, (Math.PI / 180) * startAngle, (Math.PI / 180) * endAngle, anticlockwise);
-    context.fillStyle = fillColor;
-    context.fill();
-    context.lineWidth = linewidth;
-    context.strokeStyle = color;
-    context.stroke();
-    context.strokeStyle = "#000000";
-    context.lineWidth = 1;
-    results.push(context.fillStyle = "#000000");
+    lib.context.beginPath();
+    lib.context.arc(i.x, i.y, radius, (Math.PI / 180) * startAngle, (Math.PI / 180) * endAngle, anticlockwise);
+    lib.context.fillStyle = fillColor;
+    lib.context.fill();
+    lib.context.lineWidth = linewidth;
+    lib.context.strokeStyle = color;
+    lib.context.stroke();
+    lib.context.strokeStyle = "#000000";
+    lib.context.lineWidth = 1;
+    results.push(lib.context.fillStyle = "#000000");
   }
   return results;
 };
@@ -204,10 +204,10 @@ Picture.prototype.Process = function(obj) {
     var imageHeight, imageWidth;
     imageWidth = image.width;
     imageHeight = image.height;
-    context.save();
-    context.translate(obj.x - (imageHeight / 2), obj.y - (imageWidth / 2));
-    context.drawImage(image, 0, 0);
-    return context.restore();
+    lib.context.save();
+    lib.context.translate(obj.x - (imageHeight / 2), obj.y - (imageWidth / 2));
+    lib.context.drawImage(image, 0, 0);
+    return lib.context.restore();
   };
 };
 
@@ -227,8 +227,8 @@ Text.prototype.draw = function(obj) {
   results = [];
   for (l = 0, len = obj.length; l < len; l++) {
     i = obj[l];
-    context.font = "15px Arial";
-    results.push(context.fillText(i.text, i.x, i.y));
+    lib.context.font = "15px Arial";
+    results.push(lib.context.fillText(i.text, i.x, i.y));
   }
   return results;
 };
@@ -255,61 +255,61 @@ Axes.prototype.draw = function(obj) {
     } else {
       orientation = i.orientation === null || i.orientation === void 0 ? "left" : i.orientation;
     }
-    context.beginPath();
+    lib.context.beginPath();
     if (i.type === "x") {
-      context.strokeStyle = "#000000";
+      lib.context.strokeStyle = "#000000";
       if (i.orientation === "top") {
-        context.moveTo(i.margin, i.margin);
-        context.lineTo(i.width - i.margin, i.margin);
+        lib.context.moveTo(i.margin, i.margin);
+        lib.context.lineTo(i.width - i.margin, i.margin);
       } else {
-        context.moveTo(i.margin, i.height - i.margin);
-        context.lineTo(i.width - i.margin, i.height - i.margin);
+        lib.context.moveTo(i.margin, i.height - i.margin);
+        lib.context.lineTo(i.width - i.margin, i.height - i.margin);
       }
-      context.stroke();
-      context.strokeStyle = "rgba(128, 128, 255, 0.5)";
+      lib.context.stroke();
+      lib.context.strokeStyle = "rgba(128, 128, 255, 0.5)";
       j = 0;
       while (j <= i.values.length) {
         currentX = i.margin + j / i.values.length * (i.width - (2 * i.margin));
         if (i.grid === true) {
-          context.moveTo(currentX, i.margin);
-          context.lineTo(currentX, i.height - i.margin);
+          lib.context.moveTo(currentX, i.margin);
+          lib.context.lineTo(currentX, i.height - i.margin);
         }
         if (i.orientation === "top") {
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * j).toFixed(2), currentX - 3, i.margin / 2);
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * j).toFixed(2), currentX - 3, i.margin / 2);
         } else {
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * j).toFixed(2), currentX - 3, (i.height - i.margin) + i.margin / 2);
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * j).toFixed(2), currentX - 3, (i.height - i.margin) + i.margin / 2);
         }
         j++;
       }
-      context.stroke();
-      context.strokeStyle = "#000000";
+      lib.context.stroke();
+      lib.context.strokeStyle = "#000000";
     }
     if (i.type === "y") {
       if (i.orientation === "right") {
-        context.moveTo(i.width - i.margin, i.margin);
-        context.lineTo(i.width - i.margin, i.height - i.margin);
+        lib.context.moveTo(i.width - i.margin, i.margin);
+        lib.context.lineTo(i.width - i.margin, i.height - i.margin);
       } else {
-        context.moveTo(i.margin, i.margin);
-        context.lineTo(i.margin, i.height - i.margin);
+        lib.context.moveTo(i.margin, i.margin);
+        lib.context.lineTo(i.margin, i.height - i.margin);
       }
-      context.stroke();
-      context.strokeStyle = "rgba(128, 128, 255, 0.5)";
+      lib.context.stroke();
+      lib.context.strokeStyle = "rgba(128, 128, 255, 0.5)";
       j = 0;
       while (j <= i.values.length) {
         currentY = i.margin + j / i.values.length * (i.height - (2 * i.margin));
         if (i.grid === true) {
-          context.moveTo(i.width - i.margin, currentY);
-          context.lineTo(i.margin, currentY);
+          lib.context.moveTo(i.width - i.margin, currentY);
+          lib.context.lineTo(i.margin, currentY);
         }
         if (i.orientation === "right") {
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10 + i.width - i.margin, currentY + 4);
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10 + i.width - i.margin, currentY + 4);
         } else {
-          context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10, currentY + 4);
+          lib.context.fillText((i.min + ((i.max - i.min) / i.values.length) * (i.values.length - j)).toFixed(2), 10, currentY + 4);
         }
         j++;
       }
-      context.stroke();
-      results.push(context.strokeStyle = "#000000");
+      lib.context.stroke();
+      results.push(lib.context.strokeStyle = "#000000");
     } else {
       results.push(void 0);
     }
@@ -338,24 +338,24 @@ Tooltip.prototype.getMousePos = function(canvas, evt) {};
 
 Canvas_Parse = function(obj) {
   var key, results, value;
-  window.canvas = document.getElementById(obj.id);
-  window.context = canvas.getContext("2d");
-  window.Line = new Line();
-  window.Point = new Point();
-  window.Picture = new Picture();
-  window.Axes = new Axes();
-  window.Diamond = new Diamond();
-  window.Background = new Background();
-  window.Tooltip = new Tooltip(obj);
-  window.Area = new Area();
-  window.Text = new Text();
+  lib.canvas = document.getElementById(obj.id);
+  lib.context = lib.canvas.getContext("2d");
+  lib.Line = new Line();
+  lib.Point = new Point();
+  lib.Picture = new Picture();
+  lib.Axes = new Axes();
+  lib.Diamond = new Diamond();
+  lib.Background = new Background();
+  lib.Tooltip = new Tooltip(obj);
+  lib.Area = new Area();
+  lib.Text = new Text();
   results = [];
   for (key in obj) {
     value = obj[key];
     if (key === "id") {
       continue;
     } else {
-      results.push(window[key]["draw"](value));
+      results.push(lib[key]["draw"](value));
     }
   }
   return results;
